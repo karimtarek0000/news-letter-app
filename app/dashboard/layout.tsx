@@ -1,0 +1,22 @@
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
+import type { ReactNode } from 'react'
+import DashboardHeader from './DashboardHeader'
+
+async function Dashboardlayout({ children }: { children: ReactNode }) {
+  const { has } = await auth()
+  const hasPaidPlan = has({ plan: 'pro' }) || has({ plan: 'starter' })
+
+  // if (!hasPaidPlan) {
+  //   redirect('/#pricing')
+  // }
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <DashboardHeader />
+      <main className="w-[50vw] mx-auto">{children}</main>
+    </div>
+  )
+}
+
+export default Dashboardlayout
