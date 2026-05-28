@@ -1,5 +1,3 @@
-'use server'
-
 export function normalizeCategories(rawCategories: RssCategory[] | undefined): string[] {
   if (!Array.isArray(rawCategories)) {
     return []
@@ -15,7 +13,6 @@ export function normalizeCategories(rawCategories: RssCategory[] | undefined): s
         return cat._.trim()
       }
 
-      console.warn('Unexpected category format:', cat)
       return ''
     })
     .filter(cat => cat.length > 0)

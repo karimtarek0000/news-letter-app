@@ -1,10 +1,12 @@
 'use client'
 
 import { useAuth } from '@clerk/nextjs'
+import { RefreshCw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-
+import { toast } from 'sonner'
 import { createOrUpdateUser } from '@/actions/createOrUpdateUser'
+import { validateAndAddFeed } from '@/actions/rss-fetch'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -17,8 +19,6 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { RefreshCw } from 'lucide-react'
-import { toast } from 'sonner'
 
 interface AddFeedDialogProps {
   currentFeedCount: number
@@ -51,18 +51,19 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
     startTransition(async () => {
       try {
         const user = await createOrUpdateUser(userId as string)
-        // const result = await validateAndAddFeed(user.id, newFeedUrl.trim())
+        const result = await validateAndAddFeed(user.id, newFeedUrl.trim())
 
-        // if (result.success) {
-        //   toast.success('Feed added successfully!')
-        //   setNewFeedUrl('')
-        //   router.refresh()
-        // } else {
-        //   toast.error(result.error || 'Failed to add feed.')
-        // }
+        if (result?.success) {
+          toast.success('Feed added successfully ✅')
+          setNewFeedUrl('')
+          router.refresh()
+        } else {
+          toast.error(result?.error)
+        }
       } catch (error) {
-        toast.error('Something went wrong.')
-        console.error(error)
+        if (error instanceof Error) {
+          toast.error(error.message)
+        }
       }
     })
   }

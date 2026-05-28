@@ -1,5 +1,3 @@
-'use server'
-
 export function preprocessUrl(url: string): string {
   let processedUrl = url.trim()
 

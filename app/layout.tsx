@@ -1,7 +1,7 @@
-import { Toaster } from '@/components/ui/sonner'
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Cairo } from 'next/font/google'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
 const cairo = Cairo({
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ClerkProvider>
           {children}
-          <Toaster />
+          <Toaster position="top-right" />
         </ClerkProvider>
       </body>
     </html>

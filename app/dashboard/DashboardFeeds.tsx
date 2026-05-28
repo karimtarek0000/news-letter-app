@@ -1,18 +1,19 @@
+import { auth } from '@clerk/nextjs/server'
+import { ExternalLink } from 'lucide-react'
 import { createOrUpdateUser } from '@/actions/createOrUpdateUser'
 import { getRssFeedsByUserId } from '@/actions/rss-feed'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { auth } from '@clerk/nextjs/server'
-import { ExternalLink } from 'lucide-react'
+import DeleteFeedButton from '../_components/dashboard/DeleteFeedButton'
 import AddFeedDialog from './AddFeedDialog'
 
 async function DashboardFeeds() {
   const { userId, has } = await auth()
 
-  const isPro = await has({ plan: 'pro' })
+  const isPro = has({ plan: 'pro' })
   const feedLimit = isPro ? Infinity : 3
 
   const user = await createOrUpdateUser(userId as string)
-  const feeds = await getRssFeedsByUserId(user.id)
+  const feeds = await getRssFeedsByUserId(user?.id)
 
   return (
     <Card className="transition-all hover:shadow-lg overflow-hidden">
@@ -27,6 +28,8 @@ async function DashboardFeeds() {
           <AddFeedDialog currentFeedCount={feeds.length} feedLimit={feedLimit} isPro={isPro} />
         </div>
       </CardHeader>
+
+      {/* Content */}
       <CardContent>
         {feeds.length === 0 ? (
           <div className="text-center py-12">
@@ -62,7 +65,7 @@ async function DashboardFeeds() {
                     )}
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
                       <span className="whitespace-nowrap">
-                        {feed._count?.articles ?? 0} articles
+                        {feed._count?.articles ?? 0} article
                         {feed._count?.articles !== 1 ? 's' : ''}
                       </span>
 

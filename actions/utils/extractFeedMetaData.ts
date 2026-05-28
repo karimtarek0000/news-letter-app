@@ -1,18 +1,15 @@
-'use server'
-
 import type Parser from 'rss-parser'
 
-import type { FeedMetaData } from '@/types'
+import type { FeedMetadata } from '@/types'
 
 // Extract all metadata from the feed
-export function extractFeedMetaData(feed: Parser.Output<unknown>): FeedMetaData {
-  const feedData = feed as any
-
+export function extractFeedMetadata(feed: Parser.Output<unknown>): FeedMetadata {
+  const feedAny = feed as any
   return {
-    title: feedData.title,
-    description: feedData.description,
-    link: feedData.link as string,
-    imageUrl: feedData.image?.url,
-    language: feedData.language,
+    title: feed.title || 'Untitled Feed',
+    description: feed.description,
+    link: feed.link,
+    imageUrl: feed.image?.url || feedAny.itunes?.image,
+    language: feedAny.language,
   }
 }

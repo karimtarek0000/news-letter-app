@@ -1,7 +1,7 @@
 'use server'
 
 import { extractArticles } from './extractArticles'
-import { extractFeedMetaData } from './extractFeedMetaData'
+import { extractFeedMetadata } from './extractFeedMetaData'
 import { parseFeedURL } from './parseFeedURL'
 
 // Finaly fetch the feed
@@ -9,7 +9,7 @@ export async function fetchAndParseFeed(URL: string, feedId: string) {
   try {
     const feed = await parseFeedURL(URL)
 
-    const metadata = extractFeedMetaData(feed)
+    const metadata = extractFeedMetadata(feed)
     const articles = extractArticles(feed, feedId)
 
     return {
