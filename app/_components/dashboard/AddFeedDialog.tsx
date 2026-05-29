@@ -23,7 +23,7 @@ interface AddFeedDialogProps {
 }
 
 export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: AddFeedDialogProps) {
-  const { isAdding, open, setOpen, setNewFeedUrl, handleAddFeed } = useFeedDialog(
+  const { newFeedUrl, isAdding, open, setOpen, setNewFeedUrl, handleAddFeed } = useFeedDialog(
     currentFeedCount,
     feedLimit,
     isPro,
@@ -34,6 +34,7 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
       open={open}
       onOpenChange={val => {
         if (isAdding) return
+        setNewFeedUrl('')
         setOpen(val)
       }}
     >
@@ -53,7 +54,11 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
 
         <FeedExceedLimit isPro={isPro} currentFeedCount={currentFeedCount} feedLimit={feedLimit} />
 
-        <FeedForm setNewFeedUrl={setNewFeedUrl} handleAddFeed={handleAddFeed}>
+        <FeedForm
+          newFeedUrl={newFeedUrl}
+          setNewFeedUrl={setNewFeedUrl}
+          handleAddFeed={handleAddFeed}
+        >
           <DialogFooter className="flex *:flex-1 justify-between">
             <DialogClose asChild>
               <Button variant="outline" disabled={isAdding}>

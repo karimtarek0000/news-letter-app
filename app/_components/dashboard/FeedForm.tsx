@@ -3,11 +3,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 interface FeedFormProps extends PropsWithChildren {
+  newFeedUrl: string
   setNewFeedUrl: (url: string) => void
   handleAddFeed: () => void
 }
 
-const FeedInput = ({ setNewFeedUrl, handleAddFeed, children }: FeedFormProps) => {
+const FeedInput = ({ newFeedUrl, setNewFeedUrl, handleAddFeed, children }: FeedFormProps) => {
   return (
     <form action={handleAddFeed} className="grid gap-4 py-4">
       <div className="grid gap-2">
@@ -16,6 +17,7 @@ const FeedInput = ({ setNewFeedUrl, handleAddFeed, children }: FeedFormProps) =>
           id="feed-url"
           type="text"
           placeholder="example.com/feed.xml or https://example.com/feed.xml"
+          value={newFeedUrl}
           onChange={e => setNewFeedUrl(e.target.value)}
         />
       </div>

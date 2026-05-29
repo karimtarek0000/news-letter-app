@@ -1,10 +1,10 @@
-import { Badge } from '@/components/ui/badge'
 import { Sparkles } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 import CTAButtons from '../buttons/CTAButtons'
 
 function Hero() {
   return (
-    <div className=" overflow-hidden bg-linear-to-b from-white to-emerald-50 dark:from-black dark:to-gray-950 ">
+    <header className=" overflow-hidden bg-linear-to-b from-white to-emerald-50 dark:from-black dark:to-gray-950 ">
       {/* Background decoration */}
 
       <div className=" inset-0 bg-[radial-gradient(circle_at_top_left,#00b8940f,transparent_60%),radial-gradient(circle_at_bottom_right,#00cec90f,transparent_60%)] p-7">
@@ -45,7 +45,7 @@ function Hero() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

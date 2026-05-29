@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma'
 import type { ArticleCreateData } from '@/types'
+
 export async function bulkCreateRssArticles(articles: ArticleCreateData[]) {
   const results = await Promise.allSettled(articles.map(article => createRssArticle(article)))
 
