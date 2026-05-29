@@ -31,6 +31,7 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
   const router = useRouter()
 
   const [newFeedUrl, setNewFeedUrl] = useState('')
+  const [open, setOpen] = useState(false)
   const [isAdding, startTransition] = useTransition()
 
   const handleAddFeed = async () => {
@@ -55,8 +56,9 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
 
         if (result?.success) {
           toast.success('Feed added successfully ✅')
-          setNewFeedUrl('')
           router.refresh()
+          setNewFeedUrl('')
+          setOpen(false)
         } else {
           toast.error(result?.error)
         }
@@ -69,12 +71,28 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
   }
 
   return (
-    <Dialog>
-      <DialogTrigger className="bg-linear-to-r from-emerald-500 to-emerald-600  text-white p-2 rounded-md">
+    <Dialog
+      open={open}
+      onOpenChange={val => {
+        if (isAdding) return
+        setOpen(val)
+      }}
+    >
+      <DialogTrigger
+        className="bg-linear-to-r from-emerald-500 to-emerald-600  text-white p-2 rounded-md"
+        disabled={isAdding}
+      >
         Add Feed
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent
+        onInteractOutside={e => {
+          if (isAdding) e.preventDefault()
+        }}
+        onEscapeKeyDown={e => {
+          if (isAdding) e.preventDefault()
+        }}
+      >
         <DialogHeader>
           <DialogTitle>Add a new RSS Feed</DialogTitle>
         </DialogHeader>

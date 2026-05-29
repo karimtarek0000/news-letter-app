@@ -21,7 +21,11 @@ export async function createOrUpdateUser(clerkUserId: string) {
       data: { clerkUserId },
     })
   } catch (error) {
-    console.log('Failed to fetch RSS feeds', error)
-    throw new Error('Failed to upsert user')
+    if (error instanceof Error) {
+      throw {
+        success: 400,
+        message: error.message || 'Failed to create or update the user',
+      }
+    }
   }
 }
