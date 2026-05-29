@@ -1,9 +1,5 @@
-import DashboardFeeds from './DashboardFeeds'
+import DashboardFeeds from '../_components/dashboard/DashboardFeeds'
 
 export default async function Page() {
-  return (
-    <h2>
-      <DashboardFeeds />
-    </h2>
-  )
+  return <DashboardFeeds />
 }

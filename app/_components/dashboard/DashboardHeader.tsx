@@ -1,10 +1,10 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import { useClerk } from '@clerk/nextjs'
 import { History, Home, LogOut, Settings, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 function DashboardHeader() {
   const pathname = usePathname()

@@ -2,9 +2,9 @@ import { auth } from '@clerk/nextjs/server'
 import { createOrUpdateUser } from '@/actions/createOrUpdateUser'
 import { getRssFeedsByUserId } from '@/actions/rss-feed'
 import { Card } from '@/components/ui/card'
-import FeedHeader from '../_components/dashboard/FeedHeader'
-import FeedList from '../_components/dashboard/FeedList'
 import AddFeedDialog from './AddFeedDialog'
+import FeedHeader from './FeedHeader'
+import FeedList from './FeedList'
 
 async function DashboardFeeds() {
   const { userId, has } = await auth()

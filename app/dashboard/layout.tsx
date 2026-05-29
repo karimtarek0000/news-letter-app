@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import type { ReactNode } from 'react'
-import DashboardHeader from './DashboardHeader'
+import DashboardHeader from '../_components/dashboard/DashboardHeader'
 
 async function Dashboardlayout({ children }: { children: ReactNode }) {
   const { has } = await auth()
@@ -14,7 +14,7 @@ async function Dashboardlayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <DashboardHeader />
-      <main className="w-[50vw] mx-auto">{children}</main>
+      <main className="mx-auto mt-10">{children}</main>
     </div>
   )
 }
