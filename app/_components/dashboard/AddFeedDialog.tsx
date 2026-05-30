@@ -38,12 +38,11 @@ export default function AddFeedDialog({ currentFeedCount, feedLimit, isPro }: Ad
         setOpen(val)
       }}
     >
-      <DialogTrigger
-        className="bg-linear-to-r from-emerald-500 to-emerald-600  text-white p-2 rounded-md"
-        disabled={isAdding}
-      >
-        Add Feed
-      </DialogTrigger>
+      <Button asChild>
+        <DialogTrigger className=" text-white p-2 rounded-md" disabled={isAdding}>
+          Add Feed
+        </DialogTrigger>
+      </Button>
 
       <DialogContent>
         <DialogHeader>

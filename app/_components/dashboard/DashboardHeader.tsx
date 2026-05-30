@@ -70,12 +70,7 @@ function DashboardHeader() {
           </div>
 
           <div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-2"
-              onClick={() => signOut({ redirectUrl: '/' })}
-            >
+            <Button size="sm" onClick={() => signOut({ redirectUrl: '/' })}>
               <LogOut className="h-4 w-4" />
               <span className="hidden sm:inline">Sign Out</span>
             </Button>

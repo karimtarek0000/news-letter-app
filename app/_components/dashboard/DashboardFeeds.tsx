@@ -1,20 +1,16 @@
-import { auth } from '@clerk/nextjs/server'
-import { getRssFeedsByUserId } from '@/actions/rss-feed'
-import { createOrUpdateUser } from '@/actions/user'
 import { Card } from '@/components/ui/card'
+import type { RssFeed } from '@/types'
 import AddFeedDialog from './AddFeedDialog'
 import FeedHeader from './FeedHeader'
 import FeedList from './FeedList'
 
-async function DashboardFeeds() {
-  const { userId, has } = await auth()
+interface IDashboardFeedsProps {
+  feeds: RssFeed[]
+  feedLimit: number
+  isPro: boolean
+}
 
-  const isPro = has({ plan: 'pro' })
-  const feedLimit = isPro ? Infinity : 3
-
-  const user = await createOrUpdateUser(userId as string)
-  const feeds = await getRssFeedsByUserId(user?.id as string)
-
+async function DashboardFeeds({ feeds, feedLimit, isPro }: IDashboardFeedsProps) {
   return (
     <Card className="transition-all hover:shadow-lg overflow-hidden">
       <FeedHeader>

@@ -14,7 +14,7 @@ async function Dashboardlayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <DashboardHeader />
-      <main className="mx-auto mt-10 md:min-w-[35vw]">{children}</main>
+      <main className="mx-auto mt-10 md:w-300">{children}</main>
     </div>
   )
 }
