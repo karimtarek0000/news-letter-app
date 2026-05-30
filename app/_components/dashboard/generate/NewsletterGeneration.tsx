@@ -5,15 +5,9 @@ import { Sparkles } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
-import { z } from 'zod'
-
-const newsLetterSchema = z.object({
-  suggestedTitles: z.array(z.string()).length(5),
-  suggestedSubjectLines: z.array(z.string()).length(5),
-  body: z.string(),
-})
-
-type NewsletterObject = z.infer<typeof newsLetterSchema>
+import { saveGeneratedNewsletter } from '@/actions/saveGeneratedNewsletter'
+import { type GeneratedNewsletter, newsLetterSchema } from '@/validations'
+import NewsletterDisplay from './NewsletterDisplay'
 
 const NewsletterGeneration = () => {
   const searchParams = useSearchParams()
@@ -21,14 +15,10 @@ const NewsletterGeneration = () => {
   const [articleCounts, setArticleCounts] = useState(0)
   const hasStartedRef = useRef(false)
 
-  let params: { feedIds: string[] | null } = null
+  let params: { feedIds: string[] } = null
 
   if (feedIds) {
-    try {
-      params = { feedIds: JSON.parse(feedIds) }
-    } catch (error) {
-      console.log(error)
-    }
+    params = { feedIds: JSON.parse(feedIds) }
   }
 
   const { object, submit, isLoading } = useObject({
@@ -36,7 +26,7 @@ const NewsletterGeneration = () => {
     schema: newsLetterSchema,
   })
 
-  const newsletter = object as Partial<NewsletterObject> | undefined
+  const newsletter = object as Partial<GeneratedNewsletter> | undefined
 
   const handleSave = async () => {
     if (!params || !newsletter) return
@@ -71,8 +61,7 @@ const NewsletterGeneration = () => {
           throw new Error('Error....')
         }
 
-        const data = await res.json()
-        submit(data)
+        // submit(params)
       } catch (error) {
         console.log(error)
       }

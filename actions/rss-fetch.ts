@@ -61,7 +61,7 @@ async function prepareArticlesAndMetaData(feed: RssFeed) {
   }
 }
 
-async function fetchAndStoreFeed(feedId: string) {
+export async function fetchAndStoreFeed(feedId: string) {
   try {
     // 1. Get feed info from database
     const feed = await prisma.rssFeed.findUnique({

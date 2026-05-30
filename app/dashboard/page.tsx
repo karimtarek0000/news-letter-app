@@ -1,6 +1,6 @@
 import { auth } from '@clerk/nextjs/server'
 import { getRssFeedsByUserId } from '@/actions/rss-feed'
-import { createOrUpdateUser } from '@/actions/user'
+import { createOrUpdateUser } from '@/actions/user/user'
 import DashboardFeeds from '../_components/dashboard/DashboardFeeds'
 import NewLetterGenerator from '../_components/dashboard/NewLetterGenerator'
 

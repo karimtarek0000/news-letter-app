@@ -23,7 +23,6 @@ model User {
   updatedAt   DateTime      @updatedAt
 }
 
-
 model UserSettings {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   userId         String   @unique @db.ObjectId

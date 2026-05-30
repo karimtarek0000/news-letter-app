@@ -57,7 +57,7 @@ export interface ArticleData {
  */
 export interface ArticleForPrompt {
   title: string
-  feed: { title: string | null }
+  feed?: { title: string | null }
   pubDate: Date
   summary?: string | null
   content?: string | null
@@ -67,6 +67,5 @@ export interface ArticleForPrompt {
 export interface NewsletterPromptParams {
   articleSummaries: string
   articleCount: number
-
   settings?: UserSettings | null
 }

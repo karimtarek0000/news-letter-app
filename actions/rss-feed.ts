@@ -1,7 +1,8 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import type { RssFeed } from '@/types'
+import type { ArticleForPrompt, RssFeed } from '@/types'
+import { fetchAndStoreFeed } from './rss-fetch'
 
 export async function getRssFeedsByUserId(userId: string): Promise<RssFeed[]> {
   try {
@@ -55,5 +56,30 @@ export async function deleteRssFeed(feedId: string) {
     if (error instanceof Error) {
       throw error
     }
+  }
+}
+
+export async function prepareFeedsAndArticles(feedIds: string[]): Promise<ArticleForPrompt[]> {
+  try {
+    await Promise.all(feedIds.map(feedId => fetchAndStoreFeed(feedId)))
+
+    // Fetch all articles for these feeds
+    const articles = await prisma.rssArticle.findMany({
+      where: { feedId: { in: feedIds } },
+      orderBy: { pubDate: 'desc' },
+      include: {
+        feed: {
+          select: { title: true },
+        },
+      },
+    })
+
+    if (!articles.length) {
+      throw new Error('No articles found')
+    }
+
+    return articles
+  } catch (error) {
+    throw new Error(error.message)
   }
 }
