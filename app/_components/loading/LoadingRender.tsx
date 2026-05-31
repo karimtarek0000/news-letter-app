@@ -1,6 +1,6 @@
 'use client'
 
-import { ElementType, JSX, PropsWithChildren, ReactElement } from 'react'
+import { PropsWithChildren } from 'react'
 
 interface LoadingRenderProps extends PropsWithChildren {
   isLoading: boolean

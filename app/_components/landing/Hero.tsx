@@ -1,10 +1,10 @@
-import { Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { Sparkles } from 'lucide-react'
 import CTAButtons from '../buttons/CTAButtons'
 
 function Hero() {
   return (
-    <header className=" overflow-hidden bg-linear-to-b from-white to-emerald-50 dark:from-black dark:to-gray-950 ">
+    <header className="h-screen flex flex-col justify-center overflow-hidden bg-linear-to-b from-white to-emerald-50 dark:from-black dark:to-gray-950 ">
       {/* Background decoration */}
 
       <div className=" inset-0 bg-[radial-gradient(circle_at_top_left,#00b8940f,transparent_60%),radial-gradient(circle_at_bottom_right,#00cec90f,transparent_60%)] p-7">
@@ -37,11 +37,6 @@ function Hero() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <CTAButtons />
             </div>
-
-            {/* Social Proof */}
-            <p className="mt-8 text-sm text-gray-500 dark:text-gray-400">
-              Trusted by 1,000+ creators · Save up to 5 hours weekly · Starting at $9/mo
-            </p>
           </div>
         </div>
       </div>
