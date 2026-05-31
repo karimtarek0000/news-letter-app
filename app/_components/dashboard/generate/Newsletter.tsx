@@ -1,10 +1,11 @@
 'use client'
 
-import { useAuth } from '@clerk/nextjs'
-import { Save } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { GeneratedNewsletter } from '@/validations'
+import { useAuth } from '@clerk/nextjs'
+import { Save } from 'lucide-react'
+import { use, useEffect, useState } from 'react'
 
 interface NewsletterDisplayProps {
   newsletter: Partial<GeneratedNewsletter>
@@ -41,19 +42,17 @@ const RenderList = ({
   </div>
 )
 
-const NewsletterDisplay = ({
-  newsletter,
-  onSave,
-  isGenerating = false,
-}: NewsletterDisplayProps) => {
+const Newsletter = ({ newsletter, onSave, isGenerating = false }: NewsletterDisplayProps) => {
   const { has } = useAuth()
   const [isPro, setIsPro] = useState(false)
+  const proStatus = has({ plan: 'pro' })
 
   useEffect(() => {
-    const checkPlan = async () => {
+    const checkPlan = () => {
       if (has) {
-        const proStatus = await has({ plan: 'pro' })
+        const proStatus = has({ plan: 'pro' })
         setIsPro(proStatus)
+        console.log('Pro status: ', proStatus)
       }
     }
 
@@ -83,12 +82,12 @@ const NewsletterDisplay = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <RenderList
             title="Newsletter Title Options"
-            items={newsletter.suggestedTitles}
+            items={newsletter?.suggestedTitles}
             isGenerating={isGenerating}
           />
           <RenderList
             title="Email Subject Line Options"
-            items={newsletter.suggestedSubjectLines}
+            items={newsletter?.suggestedSubjectLines}
             isGenerating={isGenerating}
           />
         </div>
@@ -97,8 +96,8 @@ const NewsletterDisplay = ({
         <div className="space-y-3">
           <h2 className="text-lg font-semibold">Newsletter Body</h2>
           <div className="border rounded-md p-6 prose dark:prose-invert min-h-50">
-            {newsletter.body ? (
-              <p>{newsletter.body}</p>
+            {newsletter?.body ? (
+              <p>{newsletter?.body}</p>
             ) : (
               <p className="italic text-muted-foreground">
                 {isGenerating ? 'Generating body…' : 'No content available'}
@@ -111,4 +110,4 @@ const NewsletterDisplay = ({
   )
 }
 
-export default NewsletterDisplay
+export default Newsletter

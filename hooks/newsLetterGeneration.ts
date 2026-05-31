@@ -24,7 +24,7 @@ export const useNewsLetterGeneration = () => {
     },
   })
 
-  const newsletter = object as Partial<GeneratedNewsletter> | undefined
+  const newsletter = object as GeneratedNewsletter
 
   const handleSaveNewsLetter = async () => {
     if (!params || !newsletter) return
