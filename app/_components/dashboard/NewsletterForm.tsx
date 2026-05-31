@@ -30,7 +30,7 @@ export default function NewsletterForm({ feeds }: INewsletterFormProps) {
         </CardHeader>
         <CardContent className="space-y-6 text-center">
           <div className="flex items-center flex-col *:w-full justify-between">
-            <div className="flex items-center justify-between grow">
+            <div className="flex items-center justify-between grow mb-3">
               <Label className="text-base font-semibold">Select Feeds</Label>
               <Button onClick={handleToggleSelectAndUnSelect} variant="ghost">
                 {isSelectedAll ? 'Unselect All' : 'Select All'}
