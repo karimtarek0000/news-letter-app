@@ -6,11 +6,11 @@ import { getCurrentUser } from './user/getCurrentUser'
 import { getUserSettingsByUserId } from './user/getUserSettingsByUserId'
 import { buildArticleSummaries } from './utils/buildArticlesSummaries'
 
-export async function generateNewsletterStream(params: { feedIds: string[] }) {
+export async function generateNewsletterStream(feedIds: string[]) {
   try {
     const user = await getCurrentUser()
     const settings = await getUserSettingsByUserId(user?.id as string)
-    const articles = await prepareFeedsAndArticles(params.feedIds)
+    const articles = await prepareFeedsAndArticles(feedIds)
     const articleSummaries = buildArticleSummaries(articles)
 
     // Ai

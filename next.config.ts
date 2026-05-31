@@ -1,8 +1,8 @@
-import type { NextConfig } from 'next/types'
-
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  turbopack: false,
+  experimental: {
+    webpackMemoryOptimizations: true,
+    preloadEntriesOnStart: false,
+  },
 }
 
-export default nextConfig

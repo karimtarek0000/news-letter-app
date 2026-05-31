@@ -2,7 +2,6 @@
 
 import { prisma } from '@/lib/prisma'
 import type { ArticleForPrompt, RssFeed } from '@/types'
-import { fetchAndStoreFeed } from './rss-fetch'
 
 export async function getRssFeedsByUserId(userId: string): Promise<RssFeed[]> {
   try {
@@ -61,9 +60,6 @@ export async function deleteRssFeed(feedId: string) {
 
 export async function prepareFeedsAndArticles(feedIds: string[]): Promise<ArticleForPrompt[]> {
   try {
-    await Promise.all(feedIds.map(feedId => fetchAndStoreFeed(feedId)))
-
-    // Fetch all articles for these feeds
     const articles = await prisma.rssArticle.findMany({
       where: { feedId: { in: feedIds } },
       orderBy: { pubDate: 'desc' },
@@ -80,6 +76,7 @@ export async function prepareFeedsAndArticles(feedIds: string[]): Promise<Articl
 
     return articles
   } catch (error) {
-    throw new Error(error.message)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    throw new Error(errorMessage)
   }
 }
