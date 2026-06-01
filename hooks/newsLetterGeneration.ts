@@ -16,7 +16,7 @@ export const useNewsLetterGeneration = () => {
     params = { feedIds: JSON.parse(feedIds) }
   }
 
-  const { object, submit, isLoading } = useObject({
+  const { object, submit, isLoading, stop } = useObject({
     api: '/api/newsletter/generate-stream',
     schema: newsLetterSchema,
     onFinish(event) {
@@ -48,6 +48,12 @@ export const useNewsLetterGeneration = () => {
 
     submit(params)
   }, [params, submit])
+
+  useEffect(() => {
+    return () => {
+      stop()
+    }
+  }, [])
 
   return { isLoading, newsletter, handleSaveNewsLetter }
 }

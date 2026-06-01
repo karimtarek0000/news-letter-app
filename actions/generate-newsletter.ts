@@ -22,6 +22,7 @@ export async function generateNewsletterStream(feedIds: string[]) {
 
     return prompt
   } catch (error) {
-    throw new Error(error.message)
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+    throw new Error(errorMessage)
   }
 }

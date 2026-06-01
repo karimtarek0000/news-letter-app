@@ -1,7 +1,7 @@
 'use server'
 
-import { auth } from '@clerk/nextjs/server'
 import { prisma } from '@/lib/prisma'
+import { auth } from '@clerk/nextjs/server'
 
 async function getUserByClerkId(clerkUserId: string) {
   try {
@@ -29,6 +29,7 @@ export async function getCurrentUser() {
 
     return user
   } catch (error) {
-    throw new Error(error.message)
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+    throw new Error(errorMessage)
   }
 }

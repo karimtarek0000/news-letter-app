@@ -1,8 +1,9 @@
+import { NextConfig } from 'next'
+
 const nextConfig: NextConfig = {
-  turbopack: false,
+  turbopack: {},
   experimental: {
     webpackMemoryOptimizations: true,
     preloadEntriesOnStart: false,
   },
 }
-

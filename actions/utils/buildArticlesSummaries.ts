@@ -8,7 +8,7 @@ export function buildArticleSummaries(articles: ArticleForPrompt[]): string {
 
       return `
    ${index + 1}. "${article.title}"
-   Source: ${article.feed.title}
+   Source: ${article?.feed?.title}
    Published: ${article.pubDate.toLocaleDateString()}
    Summary: ${summary}
    Link: ${article.link}
