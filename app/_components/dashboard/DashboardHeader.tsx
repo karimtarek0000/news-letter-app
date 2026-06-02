@@ -21,7 +21,7 @@ function DashboardHeader() {
 
           <Button size="sm" onClick={() => signOut({ redirectUrl: '/sign-in' })}>
             <LogOut className="h-4 w-4" />
-            <span className="hidden sm:inline">Sign Out</span>
+            <span className="sm:inline">Sign Out</span>
           </Button>
         </div>
       </div>
