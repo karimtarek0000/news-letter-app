@@ -1,7 +1,7 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import type { RssFeed } from '@/types'
+import type { ArticleForPrompt, RssFeed } from '@/types'
 
 export async function getRssFeedsByUserId(userId: string): Promise<RssFeed[]> {
   try {
@@ -55,5 +55,28 @@ export async function deleteRssFeed(feedId: string) {
     if (error instanceof Error) {
       throw error
     }
+  }
+}
+
+export async function prepareFeedsAndArticles(feedIds: string[]): Promise<ArticleForPrompt[]> {
+  try {
+    const articles = await prisma.rssArticle.findMany({
+      where: { feedId: { in: feedIds } },
+      orderBy: { pubDate: 'desc' },
+      include: {
+        feed: {
+          select: { title: true },
+        },
+      },
+    })
+
+    if (!articles.length) {
+      throw new Error('No articles found')
+    }
+
+    return articles
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    throw new Error(errorMessage)
   }
 }

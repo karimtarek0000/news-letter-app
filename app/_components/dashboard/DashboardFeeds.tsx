@@ -3,6 +3,7 @@ import type { RssFeed } from '@/types'
 import AddFeedDialog from './AddFeedDialog'
 import FeedHeader from './FeedHeader'
 import FeedList from './FeedList'
+import DialogControl from '../dialog/DialogControl'
 
 interface IDashboardFeedsProps {
   feeds: RssFeed[]
@@ -16,7 +17,9 @@ async function DashboardFeeds({ feeds, feedLimit, isPro }: IDashboardFeedsProps)
       <FeedHeader>
         <AddFeedDialog currentFeedCount={feeds.length} feedLimit={feedLimit} isPro={isPro} />
       </FeedHeader>
-      <FeedList feeds={feeds} />
+      <DialogControl>
+        <FeedList feeds={feeds} />
+      </DialogControl>
     </Card>
   )
 }

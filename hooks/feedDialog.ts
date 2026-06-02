@@ -1,9 +1,9 @@
+import { validateAndAddFeed } from '@/actions/rss-fetch'
+import { createOrUpdateUser } from '@/actions/user/user'
 import { useAuth } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { validateAndAddFeed } from '@/actions/rss-fetch'
-import { createOrUpdateUser } from '@/actions/user'
 
 export const useFeedDialog = (currentFeedCount: number, feedLimit: number, isPro: boolean) => {
   const { userId } = useAuth()
@@ -46,8 +46,6 @@ export const useFeedDialog = (currentFeedCount: number, feedLimit: number, isPro
           router.refresh()
           setNewFeedUrl('')
           setOpen(false)
-        } else {
-          toast.error(result?.error)
         }
       } catch (error) {
         if (error instanceof Error) {

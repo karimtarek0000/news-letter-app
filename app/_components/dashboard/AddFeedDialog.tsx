@@ -1,6 +1,5 @@
 'use client'
 
-import { RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -12,6 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { useFeedDialog } from '@/hooks/feedDialog'
+import { RefreshCw } from 'lucide-react'
 import FeedExceedLimit from './FeedExceedLimit'
 import FeedForm from './FeedForm'
 import FeedRemaining from './FeedRemaining'

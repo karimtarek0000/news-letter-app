@@ -1,6 +1,5 @@
 import { CardContent } from '@/components/ui/card'
 import type { RssFeed } from '@/types'
-import DeleteFeedButton from './DeleteFeedButton'
 import FeedCard from './FeedCard'
 
 const FeedsNotFound = () => {
@@ -11,7 +10,11 @@ const FeedsNotFound = () => {
   )
 }
 
-const FeedList = ({ feeds }: { feeds: RssFeed[] }) => {
+interface FeedListProps {
+  feeds: RssFeed[]
+}
+
+const FeedList = ({ feeds }: FeedListProps) => {
   if (!feeds.length) {
     return <FeedsNotFound />
   }
@@ -20,9 +23,7 @@ const FeedList = ({ feeds }: { feeds: RssFeed[] }) => {
     <CardContent>
       <section className="grid gap-4">
         {feeds.map(feed => (
-          <FeedCard key={feed.id} feed={feed}>
-            <DeleteFeedButton feedId={feed.id} feedTitle={feed.title || feed.url} />
-          </FeedCard>
+          <FeedCard key={feed.id} feed={feed} />
         ))}
       </section>
     </CardContent>

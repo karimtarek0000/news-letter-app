@@ -1,6 +1,7 @@
-import { ExternalLink } from 'lucide-react'
-import type { PropsWithChildren } from 'react'
 import type { RssFeed } from '@/types'
+import { ExternalLink } from 'lucide-react'
+import { type PropsWithChildren } from 'react'
+import DeleteFeedButton from './DeleteFeedButton'
 
 const Description = ({ description }: { description: string | null }) => {
   return (
@@ -31,7 +32,7 @@ interface FeedCardProps extends PropsWithChildren {
   feed: RssFeed
 }
 
-const FeedCard = ({ feed, children }: FeedCardProps) => {
+const FeedCard = ({ feed }: FeedCardProps) => {
   return (
     <section
       className="border rounded-lg p-4 hover:bg-accent/50 hover:shadow-md transition-all overflow-hidden"
@@ -66,7 +67,7 @@ const FeedCard = ({ feed, children }: FeedCardProps) => {
         </div>
 
         {/* Delete card */}
-        {children}
+        <DeleteFeedButton feedId={feed.id} />
       </div>
     </section>
   )

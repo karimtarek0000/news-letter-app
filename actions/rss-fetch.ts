@@ -1,8 +1,8 @@
 'use server'
 
-import Parser from 'rss-parser'
 import { prisma } from '@/lib/prisma'
 import type { ArticleData, FeedMetadata, RssFeed } from '@/types'
+import Parser from 'rss-parser'
 import { bulkCreateRssArticles } from './rss-article'
 import { normalizeCategories, preprocessUrl } from './utils'
 
@@ -61,7 +61,7 @@ async function prepareArticlesAndMetaData(feed: RssFeed) {
   }
 }
 
-async function fetchAndStoreFeed(feedId: string) {
+export async function fetchAndStoreFeed(feedId: string) {
   try {
     // 1. Get feed info from database
     const feed = await prisma.rssFeed.findUnique({
@@ -164,7 +164,7 @@ function extractArticles(feed: Parser.Output<unknown>, feedId: string): ArticleD
     const author = item.creator || itemAny.author || itemAny['dc:creator']
 
     // Normalize categories
-    const rawCategories = (item.categories || itemAny.category || []) as RssCategory[]
+    const rawCategories = item.categories || itemAny.category || []
 
     const categories = normalizeCategories(rawCategories)
 

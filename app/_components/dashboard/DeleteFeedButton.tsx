@@ -1,31 +1,20 @@
 'use client'
-import { Trash2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-import { deleteRssFeed } from '@/actions/rss-feed'
+
 import { Button } from '@/components/ui/button'
+import { Trash2 } from 'lucide-react'
+import { useContext } from 'react'
+import { DialogContext } from '../dialog/DialogControl'
 
 interface DeleteFeedButtonProps {
   feedId: string
-  feedTitle: string
 }
 
-function DeleteFeedButton({ feedId, feedTitle }: DeleteFeedButtonProps) {
-  const router = useRouter()
-  const handleDelete = async () => {
-    // Will change it letter
-    if (!confirm(`Are you sure you want to delete ${feedTitle}`)) {
-      return
-    }
+function DeleteFeedButton({ feedId }: DeleteFeedButtonProps) {
+  const { setNewData, openAndCloseModal } = useContext(DialogContext)
 
-    try {
-      await deleteRssFeed(feedId)
-      toast.success('Feed deleted successfully')
-      router.refresh()
-    } catch (error) {
-      console.error('Failed to delete feed:', error)
-      toast.error('Failed to delete feed')
-    }
+  const handleDelete = () => {
+    openAndCloseModal(true)
+    setNewData(feedId)
   }
 
   return (

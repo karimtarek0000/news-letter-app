@@ -1,4 +1,4 @@
-export function normalizeCategories(rawCategories: RssCategory[] | undefined): string[] {
+export function normalizeCategories(rawCategories: any[] | undefined): string[] {
   if (!Array.isArray(rawCategories)) {
     return []
   }
