@@ -14,7 +14,7 @@ export default async function Page() {
   const feeds = await getRssFeedsByUserId(user?.id as string)
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 gap-7 px-5">
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-7">
       <div>
         <DashboardFeeds feeds={feeds} feedLimit={feedLimit} isPro={isPro} />
       </div>

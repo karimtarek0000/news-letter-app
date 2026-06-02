@@ -27,7 +27,7 @@ const FeedItemSkeleton = ({ descriptionLines = 2 }: { descriptionLines?: number 
 
 export default function RssNewsletterSkeleton() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Left panel — RSS Feeds */}
       <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-5">
         {/* Header */}
