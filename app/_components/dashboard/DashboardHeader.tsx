@@ -1,10 +1,11 @@
 'use client'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { useClerk } from '@clerk/nextjs'
 import { History, Home, LogOut, Settings, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import Logo from '../logo/Logo'
 
 function DashboardHeader() {
   const pathname = usePathname()
@@ -38,11 +39,7 @@ function DashboardHeader() {
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <span className="text-xl font-bold bg-linear-to-r from-emerald-600 to-emerald-100 bg-clip-text text-transparent">
-                Feed Dashboard
-              </span>
-            </Link>
+            <Logo />
 
             <nav className="hidden md:flex items-center gap-1">
               {navItems.map(item => {
@@ -70,7 +67,7 @@ function DashboardHeader() {
           </div>
 
           <div>
-            <Button size="sm" onClick={() => signOut({ redirectUrl: '/' })}>
+            <Button size="sm" onClick={() => signOut({ redirectUrl: '/sign-in' })}>
               <LogOut className="h-4 w-4" />
               <span className="hidden sm:inline">Sign Out</span>
             </Button>
