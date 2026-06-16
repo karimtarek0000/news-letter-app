@@ -11,10 +11,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { useDialogControl } from '@/hooks/dialogControl'
-import { RefreshCw, Trash2 } from 'lucide-react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useContext, useEffect, useTransition } from 'react'
+import { Trash2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useContext, useTransition } from 'react'
 import { toast } from 'sonner'
 import { DialogContext } from '../dialog/DialogControl'
 
